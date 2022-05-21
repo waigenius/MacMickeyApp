@@ -279,6 +279,70 @@ namespace MacMickeyApp
         };
         #endregion
 
+
+
+        #region Requêtes
+
+        
+        public decimal QueryBurgerPrice(string query)
+        {
+            List<Burger> burger = burgers.Where(b => b.Name == query).ToList();
+
+            Decimal prix = 0M;
+            
+            foreach(var item in burger)
+            {
+                MessageBox.Show(item.Name);
+                ecran.Content = item.Description ;
+                prix = item.Price;
+            }
+
+            return prix;
+        }
+
+        public string QuerySide(string query)
+        {
+            List<Side> side = sides.Where(b => b.Name == query).ToList();
+
+            foreach (var item in side)
+            {
+                MessageBox.Show(item.Name);
+                ecran.Content = item.Description;
+                //ecran.Content = item.Price;
+            }
+
+            return query;
+        }
+
+        public string QueryBeverage(string query)
+        {
+            List<Beverage> beverage = beverages.Where(b => b.Name == query).ToList();
+
+            foreach (var item in beverage)
+            {
+                MessageBox.Show(item.Name);
+                ecran.Content = item.Description;
+                //ecran.Content = item.Price;
+            }
+
+            return query;
+        }
+
+        public string QueryDessert(string query)
+        {
+            List<Dessert> dessert = desserts.Where(b => b.Name == query).ToList();
+
+            foreach (var item in dessert)
+            {
+                MessageBox.Show(item.Name);
+                ecran.Content = item.Description;
+                ecran.Content = item.Price;
+            }
+
+            return query;
+        }
+
+        #endregion
         public MainWindow()
         {
             InitializeComponent();
@@ -323,8 +387,9 @@ namespace MacMickeyApp
 
         private void btn_burger1_Click(object sender, RoutedEventArgs e)
         {
+            decimal price = QueryBurgerPrice("Big Mick");
 
-
+            MessageBox.Show(price.ToString());
         }
 
         private void btn_beverage1_Click(object sender, RoutedEventArgs e)
