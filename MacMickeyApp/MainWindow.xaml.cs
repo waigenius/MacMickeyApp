@@ -18,8 +18,15 @@ namespace MacMickeyApp
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
     public partial class MainWindow : Window
     {
+        #region Déclaration et Initialisation des Variables
+
+        decimal somme = 0;
+
+        #endregion
         #region Liste des Sides
 
         List<Side> sides = new List<Side>()
@@ -288,7 +295,7 @@ namespace MacMickeyApp
         {
             List<Burger> burger = burgers.Where(b => b.Name == query).ToList();
 
-            Decimal prix = 0M;
+            decimal prix = 0M;
             
             foreach(var item in burger)
             {
@@ -300,52 +307,55 @@ namespace MacMickeyApp
             return prix;
         }
 
-        public string QuerySide(string query)
+        public decimal QuerySidePrice(string query)
         {
             List<Side> side = sides.Where(b => b.Name == query).ToList();
-
+            decimal prix = 0M;
             foreach (var item in side)
             {
                 MessageBox.Show(item.Name);
                 ecran.Content = item.Description;
-                //ecran.Content = item.Price;
+                prix = item.Price;
             }
 
-            return query;
+            return prix;
         }
 
-        public string QueryBeverage(string query)
+        public decimal QueryBeveragePrice(string query)
         {
             List<Beverage> beverage = beverages.Where(b => b.Name == query).ToList();
-
+            decimal prix = 0M;
             foreach (var item in beverage)
             {
                 MessageBox.Show(item.Name);
                 ecran.Content = item.Description;
-                //ecran.Content = item.Price;
+                prix = item.Price;
             }
 
-            return query;
+            return prix;
         }
 
-        public string QueryDessert(string query)
+        public decimal QueryDessertPrice(string query)
         {
             List<Dessert> dessert = desserts.Where(b => b.Name == query).ToList();
-
+            decimal prix = 0M;
             foreach (var item in dessert)
             {
                 MessageBox.Show(item.Name);
                 ecran.Content = item.Description;
-                ecran.Content = item.Price;
+                prix = item.Price;
             }
 
-            return query;
+            return prix;
         }
 
         #endregion
         public MainWindow()
         {
+
             InitializeComponent();
+
+            
         }
 
         #region Ecran recap Produit
@@ -357,11 +367,7 @@ namespace MacMickeyApp
         #region Bouton d'action
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Side side in sides)
-            {
-                MessageBox.Show(side.Description + side.Id);
-            }
-
+           
             
         }
 
@@ -378,6 +384,16 @@ namespace MacMickeyApp
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Valider");
+            resultat.Content = somme;
+            
+
+            // Enregistrer dans le fichier 
+
+
+
+            //Réinitialisation de la somme
+
+            somme = 0;
         }
 
         #endregion
@@ -387,24 +403,39 @@ namespace MacMickeyApp
 
         private void btn_burger1_Click(object sender, RoutedEventArgs e)
         {
-            decimal price = QueryBurgerPrice("Big Mick");
+            decimal priceBurger = QueryBurgerPrice("Big Mick");
 
-            MessageBox.Show(price.ToString());
+            ecran.Content = priceBurger; // Affichage du prix 
+
+            somme += priceBurger;
+
         }
 
         private void btn_beverage1_Click(object sender, RoutedEventArgs e)
         {
+            decimal priceBeverage = QueryBeveragePrice("Coca-Cola");
 
+            ecran.Content = priceBeverage; // Affichage du prix 
+            somme += priceBeverage;
         }
 
         private void btn_dessert1_Click(object sender, RoutedEventArgs e)
         {
+            decimal priceDessert = QueryBeveragePrice("MacFlower");
 
+            ecran.Content = priceDessert; // Affichage du prix 
+
+            somme += priceDessert;
         }
 
         private void btn_side1_Click(object sender, RoutedEventArgs e)
         {
+            decimal priceSide = QuerySidePrice("Frites");
 
+            ecran.Content = priceSide;     // (priceSide.ToString()); // Affichage du prix 
+            somme += priceSide;
         }
+
+
     }
 }
