@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,8 @@ namespace MacMickeyApp
         #region Déclaration et Initialisation des Variables
 
         decimal somme = 0;
+        List<String> commande = new List<String>(); // Commande du Client
+        int countCommande = 0;
 
         #endregion
         #region Liste des Sides
@@ -383,17 +386,38 @@ namespace MacMickeyApp
 
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Valider");
-            resultat.Content = somme;
             
+            resultat.Content = somme;
 
-            // Enregistrer dans le fichier 
+            // Gestion des exceptions pour éviter d'enregistre des fichiers vides
 
+            if (somme != 0)
+            {
+                DateTime temps = DateTime.Now;
+                countCommande += 1;
+                FileStream fs = new FileStream($"commande{countCommande}.txt", FileMode.Create, FileAccess.Write);
+                StreamWriter sw = new StreamWriter(fs);
 
+                //Boucle pour insérer le choix de l'utilsateur
+                sw.WriteLine($"Commande numéro {countCommande}\ndu {temps}");
+                foreach(var item in commande)
+                {
+                    sw.WriteLine(item);
+                }
 
-            //Réinitialisation de la somme
+                sw.WriteLine($"\nPrix total :  {somme.ToString()}$ ");
+                sw.Close();
+                fs.Close();
 
+            }
+            else
+            {
+                MessageBox.Show("Votrer panier est vide");
+            }
+
+            //Réinitialisation des données après validation
             somme = 0;
+            commande.Clear();
         }
 
         #endregion
@@ -406,34 +430,38 @@ namespace MacMickeyApp
             decimal priceBurger = QueryBurgerPrice("Big Mick");
 
             ecran.Content = priceBurger; // Affichage du prix 
-
             somme += priceBurger;
+            commande.Add($"Big Mick - {priceBurger.ToString()}$");
+
 
         }
 
+        #region Produits Beverage
+        #endregion
         private void btn_beverage1_Click(object sender, RoutedEventArgs e)
         {
             decimal priceBeverage = QueryBeveragePrice("Coca-Cola");
-
             ecran.Content = priceBeverage; // Affichage du prix 
             somme += priceBeverage;
+            commande.Add($"Coca-Cola - {priceBeverage.ToString()}$");
         }
 
         private void btn_dessert1_Click(object sender, RoutedEventArgs e)
         {
-            decimal priceDessert = QueryBeveragePrice("MacFlower");
+            decimal priceDessert = QueryBeveragePrice("Mac Flower");
 
             ecran.Content = priceDessert; // Affichage du prix 
-
             somme += priceDessert;
+            commande.Add($"Mac Flower - {priceDessert.ToString()}$");
         }
 
         private void btn_side1_Click(object sender, RoutedEventArgs e)
         {
             decimal priceSide = QuerySidePrice("Frites");
 
-            ecran.Content = priceSide;     // (priceSide.ToString()); // Affichage du prix 
+            ecran.Content = priceSide;    
             somme += priceSide;
+            commande.Add($"Frites - {priceSide.ToString()}$");
         }
 
 
