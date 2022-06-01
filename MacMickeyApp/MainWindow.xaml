@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="0,0,-0.4,0">
-        <Label x:Name="welcome" Content="Label" HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Height="47" Width="774" Background="#FFE4E0E0"/>
+        <Label x:Name="welcome" Content="Label" HorizontalAlignment="Center" Margin="10,13,0,0" VerticalAlignment="Top" Height="47" Width="774" Background="#FFE4E0E0" FontSize="16" FontWeight="Bold"/>
         <Rectangle Fill="#FFD9D9F4" HorizontalAlignment="Left" Height="45" Margin="18,165,0,0" Stroke="Black" VerticalAlignment="Top" Width="609"/>
-        <Label x:Name="panier" Content="Panier" HorizontalAlignment="Left" Margin="652,165,0,0" VerticalAlignment="Top" Height="184" Width="132" Background="#FFF0D2D2"/>
+        <Label x:Name="panier" Content="" HorizontalAlignment="Left" Margin="652,175,0,0" VerticalAlignment="Top" Height="174" Width="132" Background="#FFF0D2D2"/>
         <Label x:Name="resultat" Content="Total" HorizontalAlignment="Left" Margin="652,354,0,0" VerticalAlignment="Top" Height="38" Width="132" Background="#FFCDBBBB"/>
         <Label Content="Side" Margin="36,350,0,0" Height="33" Width="67" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Label Content="Burger" Margin="34,232,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
@@ -25,6 +25,7 @@
         <Button x:Name="btn_beverage1" Content="Coca-Cola" HorizontalAlignment="Left" Margin="136,285,0,0" VerticalAlignment="Top" Width="75" Click="btn_beverage1_Click"/>
         <Button x:Name="btn_dessert1" Content="Mac Flower" HorizontalAlignment="Left" Margin="136,325,0,0" VerticalAlignment="Top" Width="75" Click="btn_dessert1_Click"/>
         <Button x:Name="btn_side1" Content="Frites" HorizontalAlignment="Left" Margin="136,364,0,0" VerticalAlignment="Top" Width="75" Click="btn_side1_Click"/>
+        <Label x:Name="course" Content="Votre panier" HorizontalAlignment="Left" Margin="652,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.444,-0.519"/>
 
     </Grid>
 </Window>

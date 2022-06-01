@@ -29,7 +29,20 @@ namespace MacMickeyApp
         List<String> commande = new List<String>(); // Commande du Client
         int countCommande = 0;
 
+        string choixUser = "";
+        decimal prixProduit = 0;
+        string nameProduit = "";
+        int elementKey = 0; //Permet de donner une étiquette à chaque catégorie d'articles
+
+        // Variables des stocks de chaque articles
+        int stockInitial = 0;
+        int stockInitialSide = 0;
+        int stockInitialBeverage = 0;
+        int stockInitialDessert = 0;
+
+
         #endregion
+
         #region Liste des Sides
 
         List<Side> sides = new List<Side>()
@@ -216,7 +229,7 @@ namespace MacMickeyApp
             },
 
             new Dessert(){Id = 13,
-                        Name = "Milk- Shake",
+                        Name = "Milk-Shake",
                         Price = 2.10M,
                         Description = "La fameuse boisson frappée à base de lait",
                         Stockpiled = 47,
@@ -297,13 +310,12 @@ namespace MacMickeyApp
         public decimal QueryBurgerPrice(string query)
         {
             List<Burger> burger = burgers.Where(b => b.Name == query).ToList();
-
             decimal prix = 0M;
             
             foreach(var item in burger)
             {
-                MessageBox.Show(item.Name);
-                ecran.Content = item.Description ;
+                ecran.Content = item.Description ; // Permet d'afficher le description du choix
+                                                   // Gérer les autres affichages des caractéristiques de Burger
                 prix = item.Price;
             }
 
@@ -316,7 +328,6 @@ namespace MacMickeyApp
             decimal prix = 0M;
             foreach (var item in side)
             {
-                MessageBox.Show(item.Name);
                 ecran.Content = item.Description;
                 prix = item.Price;
             }
@@ -330,7 +341,6 @@ namespace MacMickeyApp
             decimal prix = 0M;
             foreach (var item in beverage)
             {
-                MessageBox.Show(item.Name);
                 ecran.Content = item.Description;
                 prix = item.Price;
             }
@@ -344,7 +354,6 @@ namespace MacMickeyApp
             decimal prix = 0M;
             foreach (var item in dessert)
             {
-                MessageBox.Show(item.Name);
                 ecran.Content = item.Description;
                 prix = item.Price;
             }
@@ -352,6 +361,162 @@ namespace MacMickeyApp
             return prix;
         }
 
+
+        #endregion
+
+        #region Mes fonctions
+        public void Reinitialiser()
+        {
+            somme = 0;
+            resultat.Content = somme;
+            prixProduit = 0;
+            commande.Clear();
+            panier.Content = ""; // Permet de vider le panier après la validation de la commande
+            resultat.Content = "";
+            ecran.Content = "";
+        }
+
+
+        #endregion
+
+        #region Gérer le Stock  des Produits
+
+        public void StockBurger(string query, bool isAdd)
+        {
+            List<Burger> burger = burgers.Where(b => b.Name == query).ToList();
+
+            foreach (var item in burger)
+            {
+                MessageBox.Show("Stock Initial Burger = " + stockInitial.ToString());
+                int stock = item.Stockpiled; //Permet de garder en mémoire le stock initial du produit
+
+                if(stockInitial < stock)
+                {
+                    stockInitial = stock; // Permet de stocker le stock de base du Produit
+                    
+                }
+
+                if (isAdd == true)
+                {
+                    item.Stockpiled -= 1;
+                    MessageBox.Show($"Decrease Burger  {item.Stockpiled}");
+                }
+                else
+                {
+                    if(item.Stockpiled < stockInitial)
+                    {
+                        item.Stockpiled += 1;
+                        MessageBox.Show($"Increase  Burger {item.Stockpiled}");
+                    }
+                    // A travailler afin d'empêcher que cette incrémentation dépassée le stock initial de l'Article. 
+                    else
+                    {
+                        item.Stockpiled = stockInitial; // Remettre le stock de base du produit
+                        MessageBox.Show($"Return to the origin  {item.Stockpiled}");
+                    }       
+                }
+            }
+        }
+        public void StockSide(string query, bool isAdd)
+        {
+            List<Side> side = sides.Where(b => b.Name == query).ToList();
+
+            foreach (var item in side)
+            {
+                MessageBox.Show("Stock Initial Side = " + stockInitialSide.ToString());
+                int stock = item.Stockpiled;
+
+                if (stockInitialSide < stock)
+                {
+                    stockInitialSide = stock;
+                }
+                if (isAdd == true)
+                {
+                    item.Stockpiled -= 1;
+                    MessageBox.Show($"Decrease Side {item.Stockpiled}");
+                }
+                else
+                {
+                    if (item.Stockpiled < stockInitialSide)
+                    {
+                        item.Stockpiled += 1;
+                        MessageBox.Show($"Increase Side  {item.Stockpiled}");
+                    }
+                    else
+                    {
+                        item.Stockpiled = stockInitialSide;
+                        MessageBox.Show($"Return to the origin Side  {item.Stockpiled}");
+                    }
+                }
+            }
+        }
+
+        public void StockBeverage(string query, bool isAdd)
+        {
+            List<Beverage> beverage = beverages.Where(b => b.Name == query).ToList();
+
+            foreach (var item in beverage)
+            {
+                MessageBox.Show("Stock Initial beverage = " + stockInitialBeverage.ToString());
+                int stock = item.Stockpiled;
+
+                if (stockInitialBeverage < stock)
+                {
+                    stockInitialBeverage = stock;
+                }
+                if (isAdd == true)
+                {
+                    item.Stockpiled -= 1;
+                    MessageBox.Show($"Decrease Beverage {item.Stockpiled}");
+                }
+                else
+                {
+                    if (item.Stockpiled < stockInitialBeverage)
+                    {
+                        item.Stockpiled += 1;
+                        MessageBox.Show($"Increase Beverage  {item.Stockpiled}");
+                    }
+                    else
+                    {
+                        item.Stockpiled = stockInitialBeverage;
+                        MessageBox.Show($"Return to the origin Beverage  {item.Stockpiled}");
+                    }
+                }
+            }
+        }
+        public void StockDessert(string query, bool isAdd)
+        {
+            List<Dessert> dessert = desserts.Where(b => b.Name == query).ToList();
+
+            foreach (var item in dessert)
+            {
+                MessageBox.Show("Stock Initial Dessert = " + stockInitialDessert.ToString());
+                int stock = item.Stockpiled;
+
+                if (stockInitialDessert < stock)
+                {
+                    stockInitialDessert = stock;
+                }
+                if (isAdd == true)
+                {
+                    item.Stockpiled -= 1;
+                    MessageBox.Show($"Decrease Dessert {item.Stockpiled}");
+                }
+                else
+                {
+                    if (item.Stockpiled < stockInitialDessert)
+                    {
+                        item.Stockpiled += 1;
+                        MessageBox.Show($"Increase Dessert  {item.Stockpiled}");
+                    }
+                    else
+                    {
+                        item.Stockpiled = stockInitialDessert;
+                        MessageBox.Show($"Return to the origin Beverage  {item.Stockpiled}");
+                    }
+                }
+            }
+        }
         #endregion
         public MainWindow()
         {
@@ -361,27 +526,100 @@ namespace MacMickeyApp
             
         }
 
-        #region Ecran recap Produit
-        #endregion
 
-        #region Panier et Total
-        #endregion
-
-        #region Bouton d'action
+        #region Boutons d'action
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-           
-            
+            if(choixUser != "")
+            {
+                // Mettre des conditions , ce ne se fait ssi l'user a fait au moins un choix ChoixUser !=""
+                commande.Add(choixUser);
+                somme += prixProduit;
+                panier.Content += choixUser + "\n";
+                resultat.Content = somme;
+
+                //Mise à jour du stock de l'article, mettre une condition pour chaque type d'article
+                switch (elementKey)
+                {
+                    case 1:
+                        StockBurger(nameProduit, true);
+                        break;
+                    case 2:
+                        StockSide(nameProduit, true);
+                        break;
+                    case 3:
+                        StockBeverage(nameProduit, true);
+                        break;
+                    case 4:
+                        StockDessert(nameProduit, true);
+                        break;
+                    default:
+                        break;
+
+                }
+                //StockBurger(nameProduit, true);
+            }
+            else
+            {
+                MessageBox.Show("Vous n'avez selectionné aucun article");
+            }
+         
+
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Delete");
+           if(choixUser != "")
+           {
+                // Supprimer l'élément dans la commande
+                commande.Remove(choixUser);
+                choixUser = ""; // Permet de remettre à vide le choix de l'user vu qu'il l'a retiré de sa commande
+                somme -= prixProduit;
+
+                //Penser à mettre une condition, on créant une variable qui représente chaque Article
+                switch (elementKey)
+                {
+                    case 1:
+                        StockBurger(nameProduit, false);
+                        break;
+                    case 2:
+                        StockSide(nameProduit, false);
+                        break;
+                    case 3:
+                        StockBeverage(nameProduit, false);
+                        break;
+                    case 4:
+                        StockDessert(nameProduit, false);
+                        break;
+                    default:
+                        break;
+
+                }
+                //StockBurger(nameProduit, false);
+
+                panier.Content = "";
+
+                foreach (var item in commande)
+                {
+                    panier.Content += item + "\n";
+                }
+                
+           }
+            else
+            {
+                MessageBox.Show("Vous n'avez selectionné aucun article");
+            }
+
         }
 
         private void Annuler_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Cancel");
+            if( choixUser != "")
+            {
+                Reinitialiser();
+                MessageBox.Show("La commande est annulée");
+            }
+            
         }
 
         private void Valider_Click(object sender, RoutedEventArgs e)
@@ -394,11 +632,17 @@ namespace MacMickeyApp
             if (somme != 0)
             {
                 DateTime temps = DateTime.Now;
+
+                //Formatage du temps pour le nom du fichier de la commande
+                string format = "ddMMyyyy-HHmmss";
+                string referenceCommande = temps.ToString(format);
+
                 countCommande += 1;
-                FileStream fs = new FileStream($"commande{countCommande}.txt", FileMode.Create, FileAccess.Write);
+                
+                FileStream fs = new FileStream($"commande{referenceCommande}.txt", FileMode.Create, FileAccess.Write);
                 StreamWriter sw = new StreamWriter(fs);
 
-                //Boucle pour insérer le choix de l'utilsateur
+             
                 sw.WriteLine($"Commande numéro {countCommande}\ndu {temps}");
                 foreach(var item in commande)
                 {
@@ -408,6 +652,7 @@ namespace MacMickeyApp
                 sw.WriteLine($"\nPrix total :  {somme.ToString()}$ ");
                 sw.Close();
                 fs.Close();
+                MessageBox.Show("Commande bien enregistrée !!! ");
 
             }
             else
@@ -415,11 +660,9 @@ namespace MacMickeyApp
                 MessageBox.Show("Votrer panier est vide");
             }
 
-            //Réinitialisation des données après validation
-            somme = 0;
-            commande.Clear();
+            Reinitialiser();
         }
-
+        
         #endregion
 
         #region Bouton des Produits
@@ -427,43 +670,38 @@ namespace MacMickeyApp
 
         private void btn_burger1_Click(object sender, RoutedEventArgs e)
         {
-            decimal priceBurger = QueryBurgerPrice("Big Mick");
-
-            ecran.Content = priceBurger; // Affichage du prix 
-            somme += priceBurger;
-            commande.Add($"Big Mick - {priceBurger.ToString()}$");
-
-
+            nameProduit = "Big Mick";
+            prixProduit = QueryBurgerPrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            elementKey = 1;
         }
 
         #region Produits Beverage
         #endregion
         private void btn_beverage1_Click(object sender, RoutedEventArgs e)
         {
-            decimal priceBeverage = QueryBeveragePrice("Coca-Cola");
-            ecran.Content = priceBeverage; // Affichage du prix 
-            somme += priceBeverage;
-            commande.Add($"Coca-Cola - {priceBeverage.ToString()}$");
+            nameProduit = "Coca-Cola";
+            prixProduit = QueryBeveragePrice(nameProduit);
+            //ecran.Content = priceBeverage; // Affichage du prix 
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            elementKey = 3;
+
         }
 
         private void btn_dessert1_Click(object sender, RoutedEventArgs e)
         {
-            decimal priceDessert = QueryBeveragePrice("Mac Flower");
-
-            ecran.Content = priceDessert; // Affichage du prix 
-            somme += priceDessert;
-            commande.Add($"Mac Flower - {priceDessert.ToString()}$");
+            nameProduit = "Mac Flower";
+            prixProduit = QueryDessertPrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            elementKey = 4;
         }
 
         private void btn_side1_Click(object sender, RoutedEventArgs e)
         {
-            decimal priceSide = QuerySidePrice("Frites");
-
-            ecran.Content = priceSide;    
-            somme += priceSide;
-            commande.Add($"Frites - {priceSide.ToString()}$");
+            nameProduit = "Frites";
+            prixProduit = QuerySidePrice(nameProduit); 
+            choixUser = $"Frites - {prixProduit.ToString()}$";
+            elementKey = 2;
         }
-
-
     }
 }
