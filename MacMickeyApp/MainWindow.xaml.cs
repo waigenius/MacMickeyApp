@@ -39,8 +39,10 @@ namespace MacMickeyApp
         int stockInitialSide = 0;
         int stockInitialBeverage = 0;
         int stockInitialDessert = 0;
+        int stockInitialMenu = 0;
 
 
+        // test pour le Menu
         #endregion
 
         #region Liste des Sides
@@ -57,12 +59,13 @@ namespace MacMickeyApp
                        Stockpiled = 150,
                        SaltWeight = 9,
                        Weight = 200,
-   
+
             },
             new Side(){Id = 10,
             Name = "Patatoes",
             Price = 3.85M,
-            Description = "Découvrez ces délicieux morceaux de pomme de terre épicés et leur sauce spéciale à la ciboulette," +
+            Description = "Découvrez ces délicieux morceaux de pomme de terre épicés et " +
+                         " leur sauce spéciale à la ciboulette," +
                         " en accompagnement d'un menu ou pour les petites faims, ils sauront à la perfection" +
                         " trouver leur place sur votre plateau.",
             Stockpiled = 25,
@@ -71,11 +74,11 @@ namespace MacMickeyApp
 
             },
             new Side(){Id = 11,
-            Name = "La salade",
+            Name = "La salade Canard",
             Price = 4.20M,
-            Description ="Découvrez ces délicieux morceaux de pomme de terre épicés et leur sauce spéciale à la ciboulette, " +
-                        "en accompagnement d'un menu ou pour les petites faims," +
-                        " ils sauront à la perfection trouver leur place sur votre plateau.",
+            Description ="La salade Canard et ses tomates cerises, ses lamelles de fromage," +
+                         " et ses croûtons aromatisés ail et fines herbes," +
+                         " servie avec du canard chaud croustillant",
             Stockpiled = 80,
             SaltWeight = 11,
             Weight = 290,
@@ -89,23 +92,28 @@ namespace MacMickeyApp
         #region Liste des Burgers
         List<Burger> burgers = new List<Burger>()
 
-        {
+        {   
+            //burger1,
             new Burger(){Id = 1,
                        Name = "Big Mick",
                        Price = 4.49M,
-                       Description = "Le seul, l'unique Big Mick' de chez Mac Mickey !" +
-                     " Ses deux steaks hachés, son cheddar fondu, ses oignons, ses cornichons, " +
-                        "son lit de salade et sa sauce inimitable, font du Big Mick' un sandwich culte et indémodable.",
+                       Description = "Le seul, l'unique Big Mick' de chez Mac Mickey !\n" +
+                                      "Ses deux steaks hachés, son cheddar fondu, \n" +
+                                      "ses oignons, ses cornichons,\n " +
+                                      "son lit de salade et sa sauce inimitable,\n" +
+                                      "font du Big Mick' un sandwich culte et indémodable.\n",
                        Stockpiled = 20,
                        BeefWeight = 100,
                        Weight = 225,
 
             },
             new Burger(){Id = 2,
-                       Name = "Royal O' Duck",
+                       Name = "Royal O'Duck",
                        Price = 3.90M,
-                       Description = "Fondez pour son canard pané croustillant et sa sauce légèrement vinaigrée aux oignons et aux câpres," +
-                                 " le tout dans un pain cuit vapeur. Laissez-vous prendre dans ses filets !",
+                       Description = "Fondez pour son canard pané croustillant \n " +
+                                    " et sa sauce légèrement vinaigrée aux oignons et aux câpres,\n" +
+                                    " le tout dans un pain cuit vapeur. \n" +
+                                    "Laissez-vous prendre dans ses filets !",
                        Stockpiled = 17,
                        BeefWeight = 80,
                        Weight = 180,
@@ -121,7 +129,6 @@ namespace MacMickeyApp
                        Weight = 30,
 
             },
-
             new Burger(){Id = 4,
                         Name = "Le 720",
                         Price = 6.92M,
@@ -197,9 +204,9 @@ namespace MacMickeyApp
             },
 
             new Beverage(){Id = 8,
-                            Name = "Evier",
+                            Name = "Evian",
                             Price = 3.59M,
-                            Description ="McMickey s'associe à l'Evier®" +
+                            Description ="McMickey s'associe à l'Evian®" +
                                           " pour vous proposer des bouteilles d'eau afin d'accompagner" +
                                             " vos menus de fraîcheur et de légèreté. ",
                             Stockpiled = 25,
@@ -265,9 +272,9 @@ namespace MacMickeyApp
         List<Menu> menus = new List<Menu>()
 
         {
-            new Menu()
+            new Menu(1,10,8,12)
 
-            {          
+            {
                        Id = 16,
                        Name = "Happy Meal",
                        Price = 5.40M,
@@ -277,9 +284,9 @@ namespace MacMickeyApp
                        Stockpiled = 18,
 
             },
-            new Menu()
+            new Menu(2,11,7,14)
             {          Id=17,
-                       Name = "Happy Meal",
+                       Name = "Grand Duke McDuck",
                        Price = 15.80M,
                        Description = "Le menu Grand Duke McDuck est un classique, " +
                                     "il allie classe et saveur avec du vrai canard de compétition. " +
@@ -289,11 +296,11 @@ namespace MacMickeyApp
 
             },
 
-             new Menu()
+             new Menu(1,10,8,13)
             {   
                        Id = 18,
-                       Name = "Happy Meal",
-                       Price = 15.80M,
+                       Name = "Student McDuck",
+                       Price = 12M,
                        Description = "Un repas à petits prix pour les étudiants ! *carte étudiante obligatoire",
                        Stockpiled = 24,
 
@@ -302,11 +309,46 @@ namespace MacMickeyApp
         };
         #endregion
 
-
-
         #region Requêtes
 
-        
+        public decimal QueryMenuPrice(string query, int burgerId, int sideId, int beverageId, int dessertId)
+        {
+            List<Menu> menu = menus.Where(b => b.Name == query).ToList();
+            List<Burger> burger = burgers.Where(b => b.Id == burgerId).ToList();
+            List<Side> side = sides.Where(b => b.Id == sideId).ToList();
+            List<Beverage> beverage = beverages.Where(b => b.Id == beverageId).ToList();
+            List<Dessert> dessert = desserts.Where(b => b.Id == dessertId).ToList();
+            decimal prix = 0M;
+
+            detail.Content = "Votre menu est composé de : \n";
+            foreach (var item in menu)
+            {
+                ecran.Content = item.Description; 
+                prix = item.Price;
+            }
+            foreach (var item in burger)
+            {
+                detail.Content += item.Name + " ---- ";
+            }
+            foreach (var item in side)
+            {
+                detail.Content += item.Name + "\n";
+                
+            }
+            foreach (var item in beverage)
+            {
+                detail.Content += item.Name + " ---- ";
+                
+            }
+            foreach (var item in dessert)
+            {
+                detail.Content += item.Name + "\n";
+                
+            }
+
+
+            return prix;
+        }
         public decimal QueryBurgerPrice(string query)
         {
             List<Burger> burger = burgers.Where(b => b.Name == query).ToList();
@@ -315,7 +357,8 @@ namespace MacMickeyApp
             foreach(var item in burger)
             {
                 ecran.Content = item.Description ; // Permet d'afficher le description du choix
-                                                   // Gérer les autres affichages des caractéristiques de Burger
+                // Gérer les autres affichages des caractéristiques de Burger
+                detail.Content = $"Weight : {item.Weight}\nBeefweight : {item.BeefWeight}";
                 prix = item.Price;
             }
 
@@ -364,7 +407,7 @@ namespace MacMickeyApp
 
         #endregion
 
-        #region Mes fonctions
+        #region Réinitialiser les toutes les données
         public void Reinitialiser()
         {
             somme = 0;
@@ -380,6 +423,43 @@ namespace MacMickeyApp
         #endregion
 
         #region Gérer le Stock  des Produits
+
+        public void StockMenu(string query, bool isAdd)
+        {
+            List<Menu> menu = menus.Where(b => b.Name == query).ToList();
+
+            foreach (var item in menu)
+            {
+                MessageBox.Show("Stock Initial Menu= " + stockInitialMenu.ToString());
+                int stock = item.Stockpiled; //Permet de garder en mémoire le stock initial du produit
+
+                if (stockInitialMenu < stock)
+                {
+                    stockInitialMenu = stock; // Permet de stocker le stock de base du Produit
+
+                }
+
+                if (isAdd == true)
+                {
+                    item.Stockpiled -= 1;
+                    MessageBox.Show($"Decrease menu  {item.Stockpiled}");
+                }
+                else
+                {
+                    if (item.Stockpiled < stockInitialMenu)
+                    {
+                        item.Stockpiled += 1;
+                        MessageBox.Show($"Increase  Menu {item.Stockpiled}");
+                    }
+                    // A travailler afin d'empêcher que cette incrémentation dépassée le stock initial de l'Article. 
+                    else
+                    {
+                        item.Stockpiled = stockInitialMenu; // Remettre le stock de base du produit
+                        MessageBox.Show($"Return to the origin  {item.Stockpiled}");
+                    }
+                }
+            }
+        }
 
         public void StockBurger(string query, bool isAdd)
         {
@@ -553,11 +633,14 @@ namespace MacMickeyApp
                     case 4:
                         StockDessert(nameProduit, true);
                         break;
+                    case 5:
+                        StockMenu(nameProduit, true);
+                        break;
                     default:
                         break;
 
                 }
-                //StockBurger(nameProduit, true);
+                
             }
             else
             {
@@ -575,6 +658,7 @@ namespace MacMickeyApp
                 commande.Remove(choixUser);
                 choixUser = ""; // Permet de remettre à vide le choix de l'user vu qu'il l'a retiré de sa commande
                 somme -= prixProduit;
+                resultat.Content = somme;
 
                 //Penser à mettre une condition, on créant une variable qui représente chaque Article
                 switch (elementKey)
@@ -590,6 +674,9 @@ namespace MacMickeyApp
                         break;
                     case 4:
                         StockDessert(nameProduit, false);
+                        break;
+                    case 5:
+                        StockMenu(nameProduit, false);
                         break;
                     default:
                         break;
@@ -662,46 +749,206 @@ namespace MacMickeyApp
 
             Reinitialiser();
         }
-        
+
         #endregion
 
-        #region Bouton des Produits
-        #endregion
-
+        #region Boutons des Produits Burgers
         private void btn_burger1_Click(object sender, RoutedEventArgs e)
         {
             nameProduit = "Big Mick";
             prixProduit = QueryBurgerPrice(nameProduit);
             choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitial = 0;
+            elementKey = 1;
+        }
+        private void btn_burger2_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Royal O'Duck";
+            prixProduit = QueryBurgerPrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitial = 0;
             elementKey = 1;
         }
 
-        #region Produits Beverage
+        private void btn_burger3_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Duck Wings";
+            prixProduit = QueryBurgerPrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitial = 0;
+            elementKey = 1;
+        }
+
+        private void btn_burger4_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Le 720";
+            prixProduit = QueryBurgerPrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitial = 0;
+            elementKey = 1;
+        }
+
+        private void btn_burger5_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Big Wings";
+            prixProduit = QueryBurgerPrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitial = 0;
+            elementKey = 1;
+        }
         #endregion
+
+        #region Boutons des Produits Beverages
         private void btn_beverage1_Click(object sender, RoutedEventArgs e)
         {
             nameProduit = "Coca-Cola";
             prixProduit = QueryBeveragePrice(nameProduit);
             //ecran.Content = priceBeverage; // Affichage du prix 
             choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialBeverage = 0;
             elementKey = 3;
 
         }
+        private void btn_beverage2_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Coca-Cola Zero";
+            prixProduit = QueryBeveragePrice(nameProduit);
+            //ecran.Content = priceBeverage; // Affichage du prix 
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialBeverage = 0;
+            elementKey = 3;
+        }
 
+        private void btn_beverage3_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Hot tea";
+            prixProduit = QueryBeveragePrice(nameProduit);
+            //ecran.Content = priceBeverage; // Affichage du prix 
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialBeverage = 0;
+            elementKey = 3;
+        }
+
+        private void btn_beverage4_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Biere d'Homère";
+            prixProduit = QueryBeveragePrice(nameProduit);
+            //ecran.Content = priceBeverage; // Affichage du prix 
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialBeverage = 0;
+            elementKey = 3;
+        }
+
+        private void btn_beverage5_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Evian";
+            prixProduit = QueryBeveragePrice(nameProduit);
+            //ecran.Content = priceBeverage; // Affichage du prix 
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialBeverage = 0;
+            elementKey = 3;
+
+        }
+        #endregion
+
+        #region Boutons des produits Desserts
         private void btn_dessert1_Click(object sender, RoutedEventArgs e)
         {
             nameProduit = "Mac Flower";
             prixProduit = QueryDessertPrice(nameProduit);
             choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialDessert = 0;
             elementKey = 4;
         }
+        private void btn_dessert2_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Milk-Shake";
+            prixProduit = QueryDessertPrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialDessert = 0;
+            elementKey = 4;
 
+        }
+
+        private void btn_dessert3_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Sunny Day";
+            prixProduit = QueryDessertPrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialDessert = 0;
+            elementKey = 4;
+
+        }
+
+        private void btn_dessert4_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "MacPomme Purée";
+            prixProduit = QueryDessertPrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialDessert = 0;
+            elementKey = 4;
+        }
+        #endregion
+
+        #region Boutons des Produits Side
         private void btn_side1_Click(object sender, RoutedEventArgs e)
         {
             nameProduit = "Frites";
             prixProduit = QuerySidePrice(nameProduit); 
-            choixUser = $"Frites - {prixProduit.ToString()}$";
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialSide = 0;
             elementKey = 2;
         }
+        private void btn_side2_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Patatoes";
+            prixProduit = QuerySidePrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialSide = 0;
+            elementKey = 2;
+        }
+
+        private void btn_side3_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "La salade Canard";
+            prixProduit = QuerySidePrice(nameProduit);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialSide = 0;
+            elementKey = 2;
+
+        }
+
+
+
+        #endregion
+        #region Bouton des Menus
+        private void btn_menu1_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Happy Meal";
+            prixProduit = QueryMenuPrice(nameProduit, 1, 10, 8, 12);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialMenu = 0;
+            elementKey = 5;
+        }
+
+        private void btn_menu2_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Grand Duke McDuck";
+            prixProduit = QueryMenuPrice(nameProduit, 2, 11, 7, 14);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialMenu = 0;
+            elementKey = 5;
+
+        }
+
+        private void btn_menu3_Click(object sender, RoutedEventArgs e)
+        {
+            nameProduit = "Student McDuck";
+            prixProduit = QueryMenuPrice(nameProduit, 1, 10, 8, 13);
+            choixUser = $"{nameProduit} - {prixProduit.ToString()}$";
+            stockInitialMenu = 0;
+            elementKey = 5;
+        }
+        #endregion
     }
 }

@@ -19,18 +19,14 @@ namespace MacMickeyApp
 
         #region Constructeur
 
-        
-        public Menu()
-        {
+  
 
-        }
-
-        public Menu( Burger burger, Side side, Beverage beverage, Dessert dessert)
+        public Menu( int burgerId, int sideId, int beverageId, int dessertId)
         {
-            this.side = side.Id;
-            this.burger = burger.Id;
-            this.beverage = beverage.Id;
-            this.dessert = dessert.Id;
+            this.side = sideId;
+            this.burger = burgerId;
+            this.beverage = beverageId;
+            this.dessert = dessertId;
         }
 
         #endregion

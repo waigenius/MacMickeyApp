@@ -7,25 +7,48 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="0,0,-0.4,0">
-        <Label x:Name="welcome" Content="Label" HorizontalAlignment="Center" Margin="10,13,0,0" VerticalAlignment="Top" Height="47" Width="774" Background="#FFE4E0E0" FontSize="16" FontWeight="Bold"/>
-        <Rectangle Fill="#FFD9D9F4" HorizontalAlignment="Left" Height="45" Margin="18,165,0,0" Stroke="Black" VerticalAlignment="Top" Width="609"/>
-        <Label x:Name="panier" Content="" HorizontalAlignment="Left" Margin="652,175,0,0" VerticalAlignment="Top" Height="174" Width="132" Background="#FFF0D2D2"/>
-        <Label x:Name="resultat" Content="Total" HorizontalAlignment="Left" Margin="652,354,0,0" VerticalAlignment="Top" Height="38" Width="132" Background="#FFCDBBBB"/>
-        <Label Content="Side" Margin="36,350,0,0" Height="33" Width="67" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Burger" Margin="34,232,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Beverage" Margin="34,274,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Dessert" Margin="34,314,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label x:Name="ecran" Content="Description" HorizontalAlignment="Left" Margin="16,67,0,0" VerticalAlignment="Top" Height="73" Width="766" Background="#FFF3E9D1"/>
-        <Label Content="Menu" HorizontalAlignment="Left" Margin="35,384,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.444,-0.519"/>
-        <Button x:Name="Add" Content="Ajouter" HorizontalAlignment="Left" Margin="55,174,0,0" VerticalAlignment="Top" Width="75" Click="Add_Click"/>
-        <Button x:Name="Delete" Content="Retirer" HorizontalAlignment="Left" Margin="177,174,0,0" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
-        <Button x:Name="Annuler" Content="Annuler" HorizontalAlignment="Left" Margin="324,175,0,0" VerticalAlignment="Top" Width="75" Click="Annuler_Click"/>
-        <Button x:Name="Valider" Content="Valider" HorizontalAlignment="Left" Margin="484,165,0,0" VerticalAlignment="Top" Width="143" Click="Valider_Click" Height="45"/>
-        <Button x:Name="btn_burger1" Content="Big Mick" HorizontalAlignment="Left" Margin="136,240,0,0" VerticalAlignment="Top" Width="75" Click="btn_burger1_Click"/>
-        <Button x:Name="btn_beverage1" Content="Coca-Cola" HorizontalAlignment="Left" Margin="136,285,0,0" VerticalAlignment="Top" Width="75" Click="btn_beverage1_Click"/>
-        <Button x:Name="btn_dessert1" Content="Mac Flower" HorizontalAlignment="Left" Margin="136,325,0,0" VerticalAlignment="Top" Width="75" Click="btn_dessert1_Click"/>
-        <Button x:Name="btn_side1" Content="Frites" HorizontalAlignment="Left" Margin="136,364,0,0" VerticalAlignment="Top" Width="75" Click="btn_side1_Click"/>
-        <Label x:Name="course" Content="Votre panier" HorizontalAlignment="Left" Margin="652,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.444,-0.519"/>
+        <Label x:Name="welcome" Content="Bienvenue chez MacMickey App" HorizontalAlignment="Center" Margin="0,10,5,0" VerticalAlignment="Top" Height="35" Width="789" Background="#F2F1F5" FontSize="20" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+        <Rectangle Fill="#D8D8D9" HorizontalAlignment="Left" Height="370" Margin="0,52,0,-2" Stroke="White" VerticalAlignment="Top" Width="539"/>
+        <Rectangle Fill="#36180c" HorizontalAlignment="Left" Height="250" Margin="16,0,0,6" VerticalAlignment="Bottom" Width="90"/>
+        <Rectangle Fill="#6c3a13" HorizontalAlignment="Left" Height="250" Margin="118,0,0,6" VerticalAlignment="Bottom" Width="90"/>
+        <Rectangle Fill="#ecab7c" HorizontalAlignment="Left" Height="250" Margin="222,0,0,6" VerticalAlignment="Bottom" Width="90"/>
+        <Rectangle Fill="#fef7da" HorizontalAlignment="Left" Height="250" Margin="330,0,0,6" VerticalAlignment="Bottom" Width="90"/>
+        <Rectangle Fill="#a4a102" HorizontalAlignment="Left" Height="250" Margin="434,0,0,6" VerticalAlignment="Bottom" Width="95"/>
+        <Rectangle Fill="#F3F3F4" HorizontalAlignment="Left" Height="370" Margin="539,50,0,0" Stroke="White" VerticalAlignment="Bottom" Width="255"/>
+        <Label x:Name="panier" Content="" HorizontalAlignment="Left" Margin="544,196,0,0" VerticalAlignment="Top" Height="174" Width="240" Background="#EDEDED"/>
+        <Label x:Name="resultat" Content="Total" HorizontalAlignment="Left" Margin="545,56,0,0" VerticalAlignment="Top" Height="55" Width="240" Background="#d656d4" FontWeight="Bold" FontSize="22"/>
+        <Label Content="Side" Margin="144,184,0,0" Height="33" Width="67" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="1.179,-1.527" Foreground="White"/>
+        <Label Content="Burger" Margin="32,184,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.589,-1.25" Foreground="White"/>
+        <Label Content="Beverage" Margin="241,184,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="1.966,-0.531" Foreground="Black"/>
+        <Label Content="Dessert" Margin="349,184,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label x:Name="ecran" Content="Description" HorizontalAlignment="Left" Margin="16,69,0,0" VerticalAlignment="Top" Height="79" Width="282" Background="#FFF3E9D1" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <Label x:Name="detail" Content="Détail" HorizontalAlignment="Left" Margin="360,69,0,0" VerticalAlignment="Top" Height="79" Width="154" Background="#FFF3E9D1"/>
+        <Label Content="Menu" HorizontalAlignment="Left" Margin="453,184,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.444,-0.519" Foreground="White"/>
+        <Button x:Name="Add" Content="Ajouter" HorizontalAlignment="Left" Margin="553,134,0,0" VerticalAlignment="Top" Width="50" Click="Add_Click"/>
+        <Button x:Name="Delete" Content="Retirer" HorizontalAlignment="Left" Margin="639,134,0,0" VerticalAlignment="Top" Width="50" Click="Delete_Click"/>
+        <Button x:Name="Annuler" Content="Annuler" HorizontalAlignment="Left" Margin="730,134,0,0" VerticalAlignment="Top" Width="50" Click="Annuler_Click"/>
+        <Button x:Name="Valider" Content="Valider" HorizontalAlignment="Left" Margin="548,357,0,0" VerticalAlignment="Top" Width="232" Click="Valider_Click" Height="45"/>
+        <Button x:Name="btn_burger1" Content="Big Mick" Margin="18,228,0,0" Width="86" Click="btn_burger1_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="btn_beverage1" Content="Coca-Cola" HorizontalAlignment="Left" Margin="223,228,0,0" VerticalAlignment="Top" Width="86" Click="btn_beverage1_Click"/>
+        <Button x:Name="btn_dessert1" Content="Mac Flower" HorizontalAlignment="Left" Margin="331,230,0,0" VerticalAlignment="Top" Width="86" Click="btn_dessert1_Click"/>
+        <Button x:Name="btn_side1" Content="Frites" HorizontalAlignment="Left" Margin="120,228,0,0" VerticalAlignment="Top" Width="86" Click="btn_side1_Click"/>
+        <Label x:Name="course" Content="Votre panier" HorizontalAlignment="Left" Margin="550,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.444,-0.519"/>
+        <Button x:Name="btn_burger2" Content="Royal O'Duck" Margin="18,264,0,0" Width="86" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btn_burger2_Click"/>
+        <Button x:Name="btn_burger3" Content="Duck Wings" Margin="18,299,0,0" Width="86" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btn_burger3_Click"/>
+        <Button x:Name="btn_burger4" Content="Le 720" Margin="18,334,0,0" Width="86" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btn_burger4_Click"/>
+        <Button x:Name="btn_burger5" Content="Big Wings" HorizontalAlignment="Left" Margin="18,369,0,0" VerticalAlignment="Top" Width="86" Click="btn_burger5_Click"/>
+        <Button x:Name="btn_side2" Content="Patatoes" HorizontalAlignment="Left" Margin="120,267,0,0" VerticalAlignment="Top" Width="86" Click="btn_side2_Click"/>
+        <Button x:Name="btn_side3" Content="Salade Canard" HorizontalAlignment="Left" Margin="120,304,0,0" VerticalAlignment="Top" Width="86"  FontSize="11" Click="btn_side3_Click"/>
+        <Button x:Name="btn_beverage2" Content="Coca-Cola Zero" HorizontalAlignment="Left" Margin="223,264,0,0" VerticalAlignment="Top" Width="86" RenderTransformOrigin="0.357,0.354" Click="btn_beverage2_Click"/>
+        <Button x:Name="btn_beverage3" Content="Hot tea" HorizontalAlignment="Left" Margin="223,299,0,0" VerticalAlignment="Top" Width="86" Click="btn_beverage3_Click"/>
+        <Button x:Name="btn_beverage4" Content="Biere d'Homère" HorizontalAlignment="Left" Margin="223,334,0,0" VerticalAlignment="Top" Width="86" Click="btn_beverage4_Click"/>
+        <Button x:Name="btn_beverage5" Content="Evian" HorizontalAlignment="Left" Margin="223,369,0,0" VerticalAlignment="Top" Width="86" Click="btn_beverage5_Click"/>
+        <Button x:Name="btn_dessert2" Content="Milk-Shake" HorizontalAlignment="Left" Margin="331,266,0,0" VerticalAlignment="Top" Width="86" Click="btn_dessert2_Click"/>
+        <Button x:Name="btn_dessert3" Content="Sunny Day" HorizontalAlignment="Left" Margin="331,305,0,0" VerticalAlignment="Top" Width="86" Click="btn_dessert3_Click"/>
+        <Button x:Name="btn_dessert4" Content="MacPomme" HorizontalAlignment="Left" Margin="331,339,0,0" VerticalAlignment="Top" Width="86" Click="btn_dessert4_Click"/>
+        <Button x:Name="btn_menu1" Content="Happy Deal" HorizontalAlignment="Left" Margin="435,228,0,0" VerticalAlignment="Top" Width="92" Height="50" Click="btn_menu1_Click"/>
+        <Button x:Name="btn_menu2" Content="McDuck" HorizontalAlignment="Left" Margin="436,291,0,0" VerticalAlignment="Top" Width="92" Height="50" Click="btn_menu2_Click"/>
+        <Button x:Name="btn_menu3" Content="Student McDuck" HorizontalAlignment="Left" Margin="436,354,0,0" VerticalAlignment="Top" Width="92" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Click="btn_menu3_Click"/>
 
     </Grid>
 </Window>
