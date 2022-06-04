@@ -477,7 +477,6 @@ namespace MacMickeyApp
         public void Reinitialiser()
         {
             somme = 0;
-            resultat.Content = somme;
             prixProduit = 0;
             commande.Clear();
             panier.Text = ""; // Permet de vider le panier après la validation de la commande
@@ -719,7 +718,7 @@ namespace MacMickeyApp
                     somme = 0;
                 }
         
-                resultat.Content = somme;
+                resultat.Content = $"{somme} $";
 
                 //Penser à mettre une condition, on créant une variable qui représente chaque Article
                 switch (elementKey)
@@ -775,7 +774,7 @@ namespace MacMickeyApp
 
             if (somme != 0)
             {
-                resultat.Content = somme;
+                resultat.Content = $"{somme} $";
                 DateTime temps = DateTime.Now;
 
                 //Formatage du temps pour le nom du fichier de la commande
