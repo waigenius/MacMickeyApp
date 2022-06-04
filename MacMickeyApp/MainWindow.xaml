@@ -7,19 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="0,0,-0.4,0">
-        <Label x:Name="welcome" Content="Bienvenue chez MacMickey App" HorizontalAlignment="Center" Margin="0,10,5,0" VerticalAlignment="Top" Height="35" Width="789" FontSize="20" FontWeight="Bold" HorizontalContentAlignment="Center" Background="#FFEEEEEE"/>
+        <Label x:Name="welcome" Content="Bienvenue chez MacMickey App" HorizontalAlignment="Center" Margin="0,10,5,0" VerticalAlignment="Top" Height="35" Width="789" FontSize="20" FontWeight="Bold" HorizontalContentAlignment="Center">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFEDE727" Offset="0"/>
+                    <GradientStop Color="#FFF6C27D" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
         <Rectangle Fill="#FFE8E8E8" HorizontalAlignment="Left" Height="370" Margin="0,52,0,-2" Stroke="White" VerticalAlignment="Top" Width="539"/>
         <Rectangle Fill="#36180c" HorizontalAlignment="Left" Height="250" Margin="16,0,0,6" VerticalAlignment="Bottom" Width="90"/>
         <Rectangle Fill="#6c3a13" HorizontalAlignment="Left" Height="250" Margin="118,0,0,6" VerticalAlignment="Bottom" Width="90"/>
-        <Rectangle Fill="#ecab7c" HorizontalAlignment="Left" Height="250" Margin="222,0,0,6" VerticalAlignment="Bottom" Width="90"/>
+        <Rectangle Fill="#FF22214F" HorizontalAlignment="Left" Height="250" Margin="222,0,0,6" VerticalAlignment="Bottom" Width="90"/>
         <Rectangle Fill="#FFFDEFB6" HorizontalAlignment="Left" Height="250" Margin="330,0,0,6" VerticalAlignment="Bottom" Width="90"/>
         <Rectangle Fill="#a4a102" HorizontalAlignment="Left" Height="250" Margin="434,0,0,6" VerticalAlignment="Bottom" Width="95"/>
         <Rectangle Fill="#F3F3F4" HorizontalAlignment="Left" Height="366" Margin="539,0,0,0" Stroke="White" VerticalAlignment="Bottom" Width="250"/>
         <Label x:Name="resultat" Content="Total" HorizontalAlignment="Left" Margin="545,56,0,0" VerticalAlignment="Top" Height="55" Width="240" Background="#FF942792" FontWeight="Bold" FontSize="36" HorizontalContentAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Disabled" Foreground="White"/>
-        <Label Content="Side" Margin="144,184,0,0" Height="33" Width="67" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="1.179,-1.527" Foreground="White"/>
-        <Label Content="Beverage" Margin="241,184,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="1.966,-0.531" Foreground="Black"/>
-        <Label Content="Dessert" Margin="349,184,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Menu" HorizontalAlignment="Left" Margin="461,184,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.444,-0.519" Foreground="White"/>
         <Button x:Name="Add" Content="Ajouter" HorizontalAlignment="Left" Margin="553,130,0,0" VerticalAlignment="Top" Width="72" Click="Add_Click" RenderTransformOrigin="0.5,0.5" Background="#FF1F7C3B" Foreground="White" Height="30" FontWeight="Bold" BorderBrush="#FF1F7C3B"/>
         <Button x:Name="Delete" Content="Retirer" HorizontalAlignment="Left" Margin="704,130,0,0" VerticalAlignment="Top" Height="30" Width="72" Click="Delete_Click" Foreground="#FFF3ECEC" Background="#FF2F2F2F" FontWeight="Bold" BorderBrush="Black"/>
         <Button x:Name="Annuler" Content="Annuler" HorizontalAlignment="Left" Margin="704,170,0,0" VerticalAlignment="Top" Width="72" Click="Annuler_Click" Background="#FFBD1F1F" Foreground="#FFF7F6F6" FontWeight="Bold" BorderBrush="#FFBD1F1F"/>
@@ -62,6 +65,11 @@
         </TextBox>
         <TextBox x:Name="panier" HorizontalAlignment="Left" Height="140" Margin="553,213,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="223" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto" Focusable="False" Background="#FFEDEDED" BorderBrush="#FFEDEDED" FontSize="14" FontStyle="Italic" FontWeight="Medium"/>
         <TextBlock x:Name="detail" HorizontalAlignment="Left" Margin="331,70,0,0" TextWrapping="Wrap" Text="Caractéristiques" VerticalAlignment="Top" Height="83" Width="196" Foreground="White" Background="#FF351515" ScrollViewer.VerticalScrollBarVisibility="Auto" FlowDirection="RightToLeft" Padding="0" TextAlignment="Center" FontWeight="Bold"/>
+        <Image HorizontalAlignment="Left" Height="50" Margin="33,170,0,0" VerticalAlignment="Top" Width="50" Source="burger.png" Stretch="Fill"/>
+        <Image x:Name="imgSide" HorizontalAlignment="Left" Height="50" Margin="135,170,0,0" VerticalAlignment="Top" Width="50" Source="side.jpg" Stretch="Fill"/>
+        <Image x:Name="imgBeverage" HorizontalAlignment="Left" Height="50" Margin="231,174,0,0" VerticalAlignment="Top" Width="70" Source="beverage.jpg"/>
+        <Image HorizontalAlignment="Left" Height="50" Margin="350,172,0,0" VerticalAlignment="Top" Width="50" Source="dessert.jpeg" RenderTransformOrigin="0.008,0.608"/>
+        <Image HorizontalAlignment="Left" Height="50" Margin="460,174,0,0" VerticalAlignment="Top" Width="50" Source="menu.jpg" RenderTransformOrigin="0.304,0.024"/>
 
     </Grid>
 </Window>

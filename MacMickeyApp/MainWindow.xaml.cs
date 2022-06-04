@@ -107,7 +107,7 @@ namespace MacMickeyApp
                                       "ses oignons, ses cornichons," +
                                       "son lit de salade et sa sauce inimitable," +
                                       "font du Big Mick' un sandwich culte et indémodable.",
-                       Stockpiled = 2,
+                       Stockpiled = 20,
                        BeefWeight = 100,
                        Weight = 225,
 
@@ -324,7 +324,7 @@ namespace MacMickeyApp
             List<Dessert> dessert = desserts.Where(b => b.Id == dessertId).ToList();
             decimal prix = 0M;
 
-            detail.Text = "Votre menu est composé de : \n";
+            detail.Text = " Votre menu est composé de \n";
             foreach (var item in menu)
             {
                 if (item.Stockpiled > 0)
@@ -631,14 +631,12 @@ namespace MacMickeyApp
                 if (isAdd == true)
                 {
                     item.Stockpiled -= 1;
-                    MessageBox.Show($"Decrease menu  {item.Stockpiled}");
                 }
                 else
                 {
                     if (item.Stockpiled < stockInitialMenu)
                     {
                         item.Stockpiled += 1;
-                        MessageBox.Show($"Increase  Menu {item.Stockpiled}");
                     }
 
                     else
